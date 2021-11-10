@@ -1,8 +1,8 @@
 /* Importaciones propias */
-import {ChatPage} from './pages/ChatPage';
+import {AppRouter} from './router/AppRouter';
 
 export const ChatApp = () => {
     return (
-        <ChatPage/>
+        <AppRouter/>
     )
 }
