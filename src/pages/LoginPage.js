@@ -1,7 +1,9 @@
 import {Link} from 'react-router-dom';
+import {useDispatch} from 'react-redux';
 
 /* Importaciones propias */
 import {useForm} from '../hooks/useForm';
+import {startLogin} from '../actions/auth';
 
 /* Estado inicial del formulario de Login */
 const initialStateFormLogin = {
@@ -11,6 +13,8 @@ const initialStateFormLogin = {
 }
 
 export const LoginPage = () => {
+    const dispatch = useDispatch();
+
     /* Hook para el formulario */
     const [formValues, handleInputChange, reset] = useForm(initialStateFormLogin);
     const {email, password, rememberMe} = formValues;
@@ -31,7 +35,8 @@ export const LoginPage = () => {
             ? localStorage.setItem('email', email)
             : localStorage.removeItem('email');
 
-        console.log(formValues);
+        /* Disparar acción para comenzar el login */
+        dispatch(startLogin(email, password));
     }
 
     /* Función para deshabilitar botón si el formulario esta incompleto */
