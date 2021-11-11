@@ -2,7 +2,7 @@ import {useEffect} from 'react';
 import {
     BrowserRouter as Router,
     Switch,
-    Route,
+    // Route,
     Redirect
 } from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
@@ -11,12 +11,14 @@ import {useDispatch, useSelector} from 'react-redux';
 import {ChatPage} from '../pages/ChatPage';
 import {AuthRouter} from './AuthRouter';
 import {startChecking} from '../actions/auth';
+import {PublicRoute} from './PublicRoute';
+import {PrivateRoute} from './PrivateRoute';
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
 
     /* Store de auth */
-    const {checking} = useSelector(state => state.auth);
+    const {checking, user} = useSelector(state => state.auth);
 
     /* Validar si tengo un usuario logueado */
     useEffect(() => {
@@ -33,9 +35,11 @@ export const AppRouter = () => {
         <Router>
             <div>
                 <Switch>
-                    <Route path="/auth" component={AuthRouter}/>
+                    {/*<Route path="/auth" component={AuthRouter}/>*/}
+                    <PublicRoute path="/auth" isAuthenticated={!!user} component={AuthRouter}/>
 
-                    <Route exact path="/" component={ChatPage}/>
+                    {/*<Route exact path="/" component={ChatPage}/>*/}
+                    <PrivateRoute exact path="/" isAuthenticated={!!user} component={ChatPage}/>
 
                     <Redirect to="/"/>
                 </Switch>
