@@ -14,6 +14,17 @@ export const startLogin = (email, password) => {
     }
 }
 
+/* Registro de usuario - comienzo */
+export const startRegister = (name, email, password) => {
+    return async (dispatch) => {
+        const resp = await fetchNoToken('auth/register', {name, email, password}, 'POST');
+        const data = await resp.json();
+        // console.log(data);
+
+        await saveDataUser(data, dispatch);
+    }
+}
+
 /* Inicio de sesión */
 export const authLogin = (user) => ({
     type: types.authLogin,
