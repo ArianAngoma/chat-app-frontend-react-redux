@@ -13,9 +13,14 @@ import {AuthRouter} from './AuthRouter';
 import {startChecking} from '../actions/auth';
 import {PublicRoute} from './PublicRoute';
 import {PrivateRoute} from './PrivateRoute';
+import {useSocket} from '../hooks/useSocket';
+import {socketSetStore} from '../actions/socket';
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
+
+    /* Hook para conexión al Socket Server */
+    const {socket, online, connectSocket, disconnectSocket} = useSocket(process.env.REACT_APP_PATH_SOCKET_SERVER);
 
     /* Store de auth */
     const {checking, user} = useSelector(state => state.auth);
@@ -24,6 +29,22 @@ export const AppRouter = () => {
     useEffect(() => {
         dispatch(startChecking());
     }, [dispatch]);
+
+    /* Conectar socket si el usuario está logueado */
+    useEffect(() => {
+        if (!!user) connectSocket();
+    }, [user, connectSocket]);
+
+    /* Desconectar socket si no hay usuario logueado */
+    useEffect(() => {
+        if (!user) disconnectSocket();
+    }, [user, disconnectSocket]);
+
+    /* Dispara acción para guardar el socket en el store */
+    useEffect(() => {
+        console.log('asdsad')
+        dispatch(socketSetStore(socket, online))
+    }, [dispatch, socket, online]);
 
     if (checking) return (
         <div className="m-0 vh-100 row justify-content-center align-items-center">
