@@ -26,8 +26,16 @@ export const LoginPage = () => {
     const handleLogin = (e) => {
         e.preventDefault();
 
+        /* Recordar email de usuario */
+        (rememberMe)
+            ? localStorage.setItem('email', email)
+            : localStorage.removeItem('email');
+
         console.log(formValues);
     }
+
+    /* Función para deshabilitar botón si el formulario esta incompleto */
+    const formFull = () => !!(email.length && password.length);
 
     return (
         <form className="login100-form validate-form flex-sb flex-w"
@@ -69,7 +77,8 @@ export const LoginPage = () => {
             </div>
 
             <div className="container-login100-form-btn m-t-17">
-                <button className="login100-form-btn" type="submit">
+                <button className="login100-form-btn" type="submit"
+                        disabled={!formFull()}>
                     Ingresar
                 </button>
             </div>
