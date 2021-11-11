@@ -16,6 +16,12 @@ export const authReducer = (state = initialState, action) => {
                 checking: false,
                 user: {...action.payload}
             }
+        /* Cambiar store auth en finalizado si el usuario esta logueado */
+        case types.authCheckingFinish:
+            return {
+                ...state,
+                checking: false
+            }
         default:
             return state;
     }

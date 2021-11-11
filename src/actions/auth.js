@@ -1,5 +1,5 @@
 /* Importaciones propias */
-import {fetchNoToken} from '../helpers/fetch';
+import {fetchNoToken, fetchWithToken} from '../helpers/fetch';
 import {types} from '../types/types';
 import {saveDataUser} from '../helpers/save-data-user';
 
@@ -29,4 +29,28 @@ export const startRegister = (name, email, password) => {
 export const authLogin = (user) => ({
     type: types.authLogin,
     payload: user
+});
+
+/* Validar Token */
+export const startChecking = () => {
+    return async (dispatch) => {
+        const resp = await fetchWithToken('auth/renew');
+        const data = await resp.json();
+        // console.log(data);
+
+        if (data.ok) {
+            localStorage.setItem('token', data.token);
+            localStorage.setItem('token-init-date', new Date().getTime());
+
+            /* Inicio de sesión */
+            dispatch(authLogin(data.user));
+        } else {
+            dispatch(authCheckingFinish());
+        }
+    }
+}
+
+/* Finaliza la carga si el usuario ya esta logueado */
+export const authCheckingFinish = () => ({
+    type: types.authCheckingFinish
 });
