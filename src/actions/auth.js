@@ -54,3 +54,18 @@ export const startChecking = () => {
 export const authCheckingFinish = () => ({
     type: types.authCheckingFinish
 });
+
+/* Logout de usuario - comienzo */
+export const startLogout = () => {
+    return (dispatch) => {
+        localStorage.clear();
+
+        /* Logout */
+        dispatch(logout());
+    }
+}
+
+/* Logout de usuario */
+export const logout = () => ({
+    type: types.authLogout
+});
