@@ -42,8 +42,7 @@ export const AppRouter = () => {
 
     /* Dispara acción para guardar el socket en el store */
     useEffect(() => {
-        console.log('asdsad')
-        dispatch(socketSetStore(socket, online))
+        dispatch(socketSetStore(socket, online));
     }, [dispatch, socket, online]);
 
     if (checking) return (
