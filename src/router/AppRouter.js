@@ -15,6 +15,7 @@ import {PublicRoute} from './PublicRoute';
 import {PrivateRoute} from './PrivateRoute';
 import {useSocket} from '../hooks/useSocket';
 import {socketSetStore} from '../actions/socket';
+import {startGetUsers} from '../actions/chat';
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
@@ -44,6 +45,11 @@ export const AppRouter = () => {
     useEffect(() => {
         dispatch(socketSetStore(socket, online));
     }, [dispatch, socket, online]);
+
+    /* Esuchar evento de los usuarios conectados */
+    useEffect(() => {
+        dispatch(startGetUsers());
+    }, [dispatch, socket]);
 
     if (checking) return (
         <div className="m-0 vh-100 row justify-content-center align-items-center">
