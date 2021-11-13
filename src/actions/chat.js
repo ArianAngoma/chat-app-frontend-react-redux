@@ -20,3 +20,9 @@ export const chatUsersLoaded = (users) => ({
     type: types.chatUsersLoaded,
     payload: users
 });
+
+/* Activar chat seleccionado */
+export const chatSetActive = (uidUserSelected) => ({
+    type: types.chatSetActive,
+    payload: uidUserSelected
+});

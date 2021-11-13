@@ -5,5 +5,6 @@ export const types = {
 
     socketSetStore: '[socket] Set Store Socket',
 
-    chatUsersLoaded: '[chat] Users Loaded'
+    chatUsersLoaded: '[chat] Users Loaded',
+    chatSetActive: '[chat] Set Active Chat'
 }
