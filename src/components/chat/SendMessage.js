@@ -1,4 +1,8 @@
+import {useDispatch} from 'react-redux';
+
+/* Importaciones propias */
 import {useForm} from '../../hooks/useForm';
+import {startChatSendMessage} from '../../actions/chat';
 
 /* Estado inicial del formulario */
 const initialState = {
@@ -6,6 +10,8 @@ const initialState = {
 }
 
 export const SendMessage = () => {
+    const dispatch = useDispatch();
+
     /* Hook para el estado del formulario */
     const [formValue, handleChange, reset] = useForm(initialState);
     const {message} = formValue;
@@ -16,6 +22,9 @@ export const SendMessage = () => {
 
         /* Validar si el formulario está vacío */
         if (!message.length) return null;
+
+        /* Acción para emitir evento para enviar nuevo mensaje personal */
+        dispatch(startChatSendMessage(message));
 
         /* Limpiar formulario */
         reset(initialState);
