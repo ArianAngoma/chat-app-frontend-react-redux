@@ -52,7 +52,14 @@ export const startChatOnMessage = () => {
 
         /* Escuchar evento de mensaje personal */
         socket?.on('message-personal', (message) => {
-            console.log(message);
+            // console.log(message);
+            dispatch(chatNewMessage(message));
         });
     }
 }
+
+/* Guardar nuevo mensaje personal */
+export const chatNewMessage = (message) => ({
+    type: types.chatNewMessage,
+    payload: message
+});
