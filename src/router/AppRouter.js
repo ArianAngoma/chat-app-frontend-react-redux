@@ -15,7 +15,7 @@ import {PublicRoute} from './PublicRoute';
 import {PrivateRoute} from './PrivateRoute';
 import {useSocket} from '../hooks/useSocket';
 import {socketSetStore} from '../actions/socket';
-import {startChatGetUsers} from '../actions/chat';
+import {startChatGetUsers, startChatOnMessage} from '../actions/chat';
 
 export const AppRouter = () => {
     const dispatch = useDispatch();
@@ -49,6 +49,11 @@ export const AppRouter = () => {
     /* Esuchar evento de los usuarios conectados */
     useEffect(() => {
         dispatch(startChatGetUsers());
+    }, [dispatch, socket]);
+
+    /* Escuchar evento del mensaje personal */
+    useEffect(() => {
+        dispatch(startChatOnMessage());
     }, [dispatch, socket]);
 
     if (checking) return (

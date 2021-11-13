@@ -43,3 +43,16 @@ export const startChatSendMessage = (message) => {
         });
     }
 }
+
+/* Escuchar evento del mensaje personal - comienzo */
+export const startChatOnMessage = () => {
+    return (dispatch, getState) => {
+        /* Obtener socket del store */
+        const {socket} = getState().socket;
+
+        /* Escuchar evento de mensaje personal */
+        socket?.on('message-personal', (message) => {
+            console.log(message);
+        });
+    }
+}
