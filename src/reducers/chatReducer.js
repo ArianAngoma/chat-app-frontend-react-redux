@@ -1,3 +1,6 @@
+/* Importaciones propias */
+import {types} from '../types/types';
+
 /* Estado inicial */
 const initialState = {
     uid: '',
@@ -8,6 +11,11 @@ const initialState = {
 
 export const chatReducer = (state = initialState, action) => {
     switch (action.type) {
+        case types.chatUsersLoaded:
+            return {
+                ...state,
+                users: [...action.payload]
+            }
         default:
             return state;
     }

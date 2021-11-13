@@ -3,5 +3,7 @@ export const types = {
     authLogin: '[auth] Login',
     authLogout: '[auth] Logout',
 
-    socketSetStore: '[socket] Set Store Socket '
+    socketSetStore: '[socket] Set Store Socket',
+
+    chatUsersLoaded: '[chat] Users Loaded'
 }
