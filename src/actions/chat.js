@@ -89,3 +89,8 @@ export const chatMessagesLoaded = (messages) => ({
     type: types.chatMessagesLoaded,
     payload: messages
 });
+
+/* Limpiar store al hacer logout */
+export const chatClearLogout = () => ({
+    type: types.chatClearLogout
+});

@@ -2,6 +2,7 @@
 import {fetchNoToken, fetchWithToken} from '../helpers/fetch';
 import {types} from '../types/types';
 import {saveDataUser} from '../helpers/save-data-user';
+import {chatClearLogout} from './chat';
 
 /* Inicio de sesión - comienzo */
 export const startLogin = (email, password) => {
@@ -59,6 +60,9 @@ export const authCheckingFinish = () => ({
 export const startLogout = () => {
     return (dispatch) => {
         localStorage.clear();
+
+        /* Dispara acción para limpiar el store del chat */
+        dispatch(chatClearLogout());
 
         /* Logout */
         dispatch(logout());

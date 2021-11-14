@@ -3,7 +3,6 @@ import {types} from '../types/types';
 
 /* Estado inicial */
 const initialState = {
-    uid: '',
     uidUserChatActive: null, // uid del usuario que quiero enviar mensajes
     users: [], // Todos los usuario de la DB
     messages: [] // Mensajes del chat seleccionado
@@ -44,6 +43,9 @@ export const chatReducer = (state = initialState, action) => {
                 ...state,
                 messages: [...action.payload]
             }
+        /* Limpiar store al hacer logout */
+        case types.chatClearLogout:
+            return initialState;
         default:
             return state;
     }

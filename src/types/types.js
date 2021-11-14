@@ -8,5 +8,6 @@ export const types = {
     chatUsersLoaded: '[chat] Users Loaded',
     chatSetActive: '[chat] Set Active Chat',
     chatNewMessage: '[chat] New Message',
-    chatMessagesLoaded: '[chat] Messages Loaded'
+    chatMessagesLoaded: '[chat] Messages Loaded',
+    chatClearLogout: '[chat] Clear Logout'
 }
