@@ -1,5 +1,6 @@
 /* Importaciones propias */
 import {types} from '../types/types';
+import {fetchWithToken} from '../helpers/fetch';
 
 /* Obtener todos los usuarios - comienzo */
 export const startChatGetUsers = () => {
@@ -62,4 +63,22 @@ export const startChatOnMessage = () => {
 export const chatNewMessage = (message) => ({
     type: types.chatNewMessage,
     payload: message
+});
+
+/* Cargar mensajes de chat - comienzo */
+export const startChatMessagesLoaded = (uidUserSelected) => {
+    return async (dispatch) => {
+        /* Cargar mensajes del chat */
+        const resp = await fetchWithToken(`messages/${uidUserSelected}`);
+        const data = await resp.json();
+
+        /* Dispara acción para cargar mensajes en el store */
+        dispatch(chatMessagesLoaded(data.messages));
+    }
+}
+
+/* Cargar mensajes del chat */
+export const chatMessagesLoaded = (messages) => ({
+    type: types.chatMessagesLoaded,
+    payload: messages
 });

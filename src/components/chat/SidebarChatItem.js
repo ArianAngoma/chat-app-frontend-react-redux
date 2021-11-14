@@ -1,7 +1,7 @@
 import {useDispatch, useSelector} from 'react-redux';
 
 /* Importaciones propias */
-import {chatSetActive} from '../../actions/chat';
+import {chatSetActive, startChatMessagesLoaded} from '../../actions/chat';
 
 export const SidebarChatItem = ({user}) => {
     const dispatch = useDispatch();
@@ -12,6 +12,9 @@ export const SidebarChatItem = ({user}) => {
     /* Función que dispara la acción para activar el chat */
     const handleActiveChat = () => {
         dispatch(chatSetActive(user.uid));
+
+        /* Disparar acción de cargar mensajes del chat activo */
+        dispatch(startChatMessagesLoaded(user.uid));
     }
 
     return (
