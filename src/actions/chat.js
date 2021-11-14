@@ -1,6 +1,7 @@
 /* Importaciones propias */
 import {types} from '../types/types';
 import {fetchWithToken} from '../helpers/fetch';
+import {scrollToBottom, scrollToBottomAnimated} from '../helpers/scroll-to-bottom';
 
 /* Obtener todos los usuarios - comienzo */
 export const startChatGetUsers = () => {
@@ -55,6 +56,9 @@ export const startChatOnMessage = () => {
         socket?.on('message-personal', (message) => {
             // console.log(message);
             dispatch(chatNewMessage(message));
+
+            /* Scroll para los nuevos mensajes personales */
+            scrollToBottomAnimated('messages');
         });
     }
 }
@@ -74,6 +78,9 @@ export const startChatMessagesLoaded = (uidUserSelected) => {
 
         /* Dispara acción para cargar mensajes en el store */
         dispatch(chatMessagesLoaded(data.messages));
+
+        /* Scroll para el chat seleccionado */
+        scrollToBottom('messages');
     }
 }
 

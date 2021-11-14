@@ -12,7 +12,8 @@ export const Messages = () => {
 
     return (
         <div className="mesgs">
-            <div className="msg_history">
+            <div className="msg_history"
+                 id="messages">
                 {
                     messages.map(message => (
                         (message.to === user.uid)
